@@ -218,10 +218,9 @@ export function updateProjectScripts(projectRoot) {
   packageJson.main = 'expo-router/entry';
   const patchCommand = 'node node_modules/expo-template-kit/scripts/patch-native-deps.mjs';
   const previousPostinstall = packageJson.scripts?.postinstall;
-  const postinstall =
-    previousPostinstall && !previousPostinstall.includes(patchCommand)
-      ? previousPostinstall + ' && ' + patchCommand
-      : patchCommand;
+  const postinstall = previousPostinstall?.includes(patchCommand)
+    ? previousPostinstall
+    : [previousPostinstall, patchCommand].filter(Boolean).join(' && ');
   packageJson.scripts = {
     ...packageJson.scripts,
     postinstall,

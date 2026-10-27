@@ -349,6 +349,7 @@ test('installs Reactotron and writes local environment scripts and aliases', () 
     );
 
     updateProjectScripts(projectRoot);
+    updateProjectScripts(projectRoot); // Re-running configuration must preserve existing hooks.
     updateProjectTypeScriptAliases(projectRoot);
 
     const packageJson = JSON.parse(readFileSync(join(projectRoot, 'package.json'), 'utf8'));
