@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import * as Sentry from '@sentry/react-native';
 import { captureException, logger, useAppReady } from 'expo-template-kit';
 
-import { isLoggerEnabled } from '@/config/environment';
+import { isLoggerEnabled, sentryDsn } from '@/config/environment';
 import { registerSentryNavigation } from '@/config/sentry';
 
 import '../config/reactotron';
@@ -62,4 +62,5 @@ export function ErrorBoundary({ error, retry }: ErrorBoundaryProps) {
   );
 }
 
-export default Sentry.wrap(RootLayout);
+// Sentry must be initialized before its app-start instrumentation is mounted.
+export default sentryDsn ? Sentry.wrap(RootLayout) : RootLayout;
