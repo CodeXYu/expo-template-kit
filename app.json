@@ -40,7 +40,13 @@
           "url": "https://sentry.io/"
         }
       ],
-      "expo-localization"
+      "expo-localization",
+      [
+        "expo-dev-client",
+        {
+          "toolsButton": true
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true,

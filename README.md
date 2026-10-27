@@ -18,6 +18,11 @@ npm run android
 后续使用 `npm start` 启动 Metro，再打开已安装的开发应用。
 Web 使用 `npm run web`。
 
+示例和生成项目均安装 `expo-dev-client`，并通过插件配置 `toolsButton: true` 显示开发环境悬浮工具按钮。
+点击按钮打开开发菜单，再选择 Reload 重新加载；保存代码时仍可使用 Fast Refresh。
+安装依赖或修改原生插件配置后，需要重新执行 `npm run android` 或 `npm run ios` 编译安装开发包，
+仅重启 Metro 不会更新已有安装包。此按钮仅用于开发构建，正式版不显示。
+
 环境变量结构见 `.env.template`。开发、集成和生产配置在首次安装时由模板补齐；已有本地配置不会覆盖。
 Sentry 未配置 DSN 时不启用上报。不要提交本地环境文件或凭据。
 

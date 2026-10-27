@@ -110,6 +110,7 @@ test('updates app identifiers and owning plugins without duplicates', () => {
         name: 'my-app',
         plugins: [
           'expo-router',
+          ['expo-dev-client', { toolsButton: false }],
           ['expo-splash-screen', { image: 'default.png' }],
           ['react-native-splash-screen-newarch', { image: 'old.png' }],
           ['@sentry/react-native/expo', { organization: 'old-org' }],
@@ -131,6 +132,7 @@ test('updates app identifiers and owning plugins without duplicates', () => {
       },
     ],
     ['@sentry/react-native', { url: 'https://sentry.io/' }],
+    ['expo-dev-client', { toolsButton: true }],
   ]);
 });
 

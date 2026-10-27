@@ -29,6 +29,7 @@ export const expoPackages = [
   // taking npm latest, keeping Expo Go and native builds on tested versions.
   '@sentry/react-native',
   '@shopify/flash-list',
+  'expo-dev-client',
   'expo-image',
   'expo-localization',
   'expo-network',
@@ -150,6 +151,7 @@ export function configureExpoApp(config, appId) {
     ...plugins.filter(plugin => {
       const name = Array.isArray(plugin) ? plugin[0] : plugin;
       return (
+        name !== 'expo-dev-client' &&
         name !== splashPluginName &&
         name !== 'expo-splash-screen' &&
         name !== sentryPluginName &&
@@ -158,6 +160,7 @@ export function configureExpoApp(config, appId) {
     }),
     pluginConfig,
     sentryPluginConfig,
+    ['expo-dev-client', { toolsButton: true }],
   ];
 
   return config.expo ? { ...config, expo } : expo;
