@@ -72,7 +72,7 @@
     "ios:dev": "dotenv -o -e .env.development -- expo run:ios",
     "ios:int": "dotenv -o -e .env.int -- expo run:ios --configuration Release",
     "ios:production": "dotenv -o -e .env.production -- expo run:ios --configuration Release",
-    "postinstall": "node scripts/setup-env.mjs"
+    "postinstall": "node scripts/setup-env.mjs && node packages/kit/scripts/patch-native-deps.mjs"
   },
   "private": true,
   "workspaces": [

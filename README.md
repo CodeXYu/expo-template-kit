@@ -69,3 +69,5 @@ npm run verify:matrix -- 58
 ```
 
 详细能力见 [生成项目使用说明](docs/generated-project-usage.md) 和 [请求客户端说明](docs/request-client.md)。
+
+启动图库的 AGP 9 兼容补丁由 postinstall 自动应用，仅替换已移除的 ProGuard 默认文件名；上游修复后可移除 packages/kit/scripts/patch-native-deps.mjs 中对应逻辑。

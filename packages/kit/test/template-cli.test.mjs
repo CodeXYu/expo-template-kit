@@ -336,7 +336,10 @@ test('installs Reactotron and writes local environment scripts and aliases', () 
   try {
     writeFileSync(
       join(projectRoot, 'package.json'),
-      JSON.stringify({ scripts: { custom: 'node custom.mjs' } })
+      JSON.stringify({
+        main: './src/index.ts',
+        scripts: { custom: 'node custom.mjs', postinstall: 'node setup.mjs' },
+      })
     );
     writeFileSync(
       join(projectRoot, 'tsconfig.json'),
@@ -350,6 +353,11 @@ test('installs Reactotron and writes local environment scripts and aliases', () 
 
     const packageJson = JSON.parse(readFileSync(join(projectRoot, 'package.json'), 'utf8'));
     assert.equal(packageJson.scripts.custom, 'node custom.mjs');
+    assert.equal(packageJson.main, 'expo-router/entry');
+    assert.equal(
+      packageJson.scripts.postinstall,
+      'node setup.mjs && node node_modules/expo-template-kit/scripts/patch-native-deps.mjs'
+    );
     assert.equal(packageJson.scripts.start, 'npm run start:dev');
     assert.equal(packageJson.scripts.format, 'prettier --write .');
     assert.equal(packageJson.scripts['format:check'], 'prettier --check .');
@@ -529,6 +537,7 @@ test('updates only the exact template dependency and leaves business sources int
       packageJson.dependencies[templatePackageName],
       'file:vendor/expo-template-kit-1.0.0-v1.1.0.tgz'
     );
+    assert.equal(existsSync(join(projectRoot, 'vendor/expo-template-kit-1.0.0-v1.1.0.tgz')), true);
     assert.equal(readFileSync(appPath, 'utf8'), 'export default null;\n');
     assert.equal(readFileSync(pagePath, 'utf8'), 'export default null;\n');
     assert.equal(readFileSync(configPath, 'utf8'), 'export const queryClient = null;\n');

@@ -13,6 +13,8 @@ import { tmpdir } from 'node:os';
 import { dirname, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { patchNativeDependencies } from './patch-native-deps.mjs';
+
 const packageRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const packageMeta = JSON.parse(readFileSync(join(packageRoot, 'package.json'), 'utf8'));
 const templatePackageName = packageMeta.name;
@@ -214,8 +216,15 @@ export function copyProjectTemplate(projectRoot) {
 export function updateProjectScripts(projectRoot) {
   const { packageJson, packagePath } = readProjectPackage(projectRoot);
   packageJson.main = 'expo-router/entry';
+  const patchCommand = 'node node_modules/expo-template-kit/scripts/patch-native-deps.mjs';
+  const previousPostinstall = packageJson.scripts?.postinstall;
+  const postinstall =
+    previousPostinstall && !previousPostinstall.includes(patchCommand)
+      ? previousPostinstall + ' && ' + patchCommand
+      : patchCommand;
   packageJson.scripts = {
     ...packageJson.scripts,
+    postinstall,
     start: 'npm run start:dev',
     android: 'npm run android:dev',
     ios: 'npm run ios:dev',
@@ -363,6 +372,7 @@ export function updateProject(version, projectRoot = process.cwd()) {
     : 'file:' + relative(projectRoot, reference);
   writeJson(packagePath, packageJson);
   run('npm', ['install'], projectRoot);
+  patchNativeDependencies(projectRoot);
   run('npx', ['expo', 'install', '--fix'], projectRoot);
   run('npx', ['expo-doctor'], projectRoot);
 }

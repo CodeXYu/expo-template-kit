@@ -143,3 +143,5 @@ npm run template:update -- 1.0 # 仅在将来创建该 Tag 后使用
 - [v1.0.6 迁移说明](docs/migrations/v1.0.6.md)
 - [模板反哺指南](docs/template-contribution.md)
 - [发布与升级](docs/template-release-and-upgrade.md)
+
+启动图库的 AGP 9 兼容补丁由 postinstall 自动应用，仅替换已移除的 ProGuard 默认文件名；上游修复后可移除 packages/kit/scripts/patch-native-deps.mjs 中对应逻辑。
