@@ -1,0 +1,123 @@
+{
+  "name": "expo-template-kit",
+  "description": "Versioned React Native foundation and Expo project generator.",
+  "main": "./src/index.ts",
+  "react-native": "./src/index.ts",
+  "types": "./src/index.ts",
+  "version": "1.0.0",
+  "bin": {
+    "create-rn-expo-app": "./scripts/template-cli.mjs",
+    "rn-expo-template": "./scripts/template-cli.mjs",
+    "create-expo-kit": "./scripts/template-cli.mjs",
+    "expo-template": "./scripts/template-cli.mjs"
+  },
+  "exports": {
+    ".": {
+      "react-native": "./src/index.ts",
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    }
+  },
+  "files": [
+    "assets",
+    "docs",
+    "scripts",
+    "src",
+    "template",
+    "AGENTS.md",
+    "LICENSE",
+    "README.md"
+  ],
+  "peerDependencies": {
+    "@expo/vector-icons": ">=14 <17",
+    "@shopify/flash-list": ">=2 <3",
+    "@tanstack/react-query": ">=5 <6",
+    "dayjs": ">=1 <2",
+    "expo": ">=54 <59",
+    "expo-image": ">=3 <59",
+    "expo-network": ">=8 <59",
+    "expo-router": ">=6 <59",
+    "react": ">=19 <20",
+    "react-i18next": ">=17 <18",
+    "react-native": ">=0.81 <0.89",
+    "react-native-gesture-handler": ">=2 <4",
+    "react-native-keyboard-controller": ">=1.18.5 <2",
+    "react-native-reanimated": ">=4 <5",
+    "react-native-safe-area-context": ">=5 <6",
+    "react-native-splash-screen-newarch": "^2.2.0"
+  },
+  "peerDependenciesMeta": {
+    "@expo/vector-icons": {
+      "optional": true
+    },
+    "@shopify/flash-list": {
+      "optional": true
+    },
+    "@tanstack/react-query": {
+      "optional": true
+    },
+    "dayjs": {
+      "optional": true
+    },
+    "expo": {
+      "optional": true
+    },
+    "expo-image": {
+      "optional": true
+    },
+    "expo-network": {
+      "optional": true
+    },
+    "expo-router": {
+      "optional": true
+    },
+    "react": {
+      "optional": true
+    },
+    "react-i18next": {
+      "optional": true
+    },
+    "react-native": {
+      "optional": true
+    },
+    "react-native-gesture-handler": {
+      "optional": true
+    },
+    "react-native-keyboard-controller": {
+      "optional": true
+    },
+    "react-native-reanimated": {
+      "optional": true
+    },
+    "react-native-safe-area-context": {
+      "optional": true
+    },
+    "react-native-splash-screen-newarch": {
+      "optional": true
+    }
+  },
+  "scripts": {
+    "lint": "eslint src scripts template test",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc --noEmit --pretty false",
+    "test": "node --test test/*.test.mjs",
+    "verify:boundaries": "node scripts/check-boundaries.mjs",
+    "verify:matrix": "node scripts/verify-sdk-matrix.mjs",
+    "pack:check": "npm pack --dry-run"
+  },
+  "template": {
+    "supportedExpoSdks": [
+      58
+    ]
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/CodeXYu/expo-template-kit.git",
+    "directory": "packages/kit"
+  }
+}
